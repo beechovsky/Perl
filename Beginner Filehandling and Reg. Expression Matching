@@ -1,0 +1,29 @@
+#!/usr/bin/perl -w
+
+# Jeff Bucklew 
+
+# Write a program that prompts the user for the name of a file, 
+# a first search phrase, and a second search phrase.  The program 
+# should then print each line of the file that mentions either 
+# search phrase. It shouldn’t do anything for other lines of input.
+
+use strict; 
+
+print "Enter a filename: ";
+open(my $fh, <>)or die "can't open file" ;
+
+print "Enter a word to look for in this file: ";
+chomp($word1 = <>);
+
+print "Enter another word to look for in this file: ";
+chomp($word2 = <>);
+
+my @lines = <$fh>;
+
+foreach(@lines)
+{
+  if(/($word1+$word2+)/isg) {print $_;}
+  # below is a cheat due to the regex not working properly on school servers
+  #  if (index(lc($_),lc( $word1)) > -1){print $_;}
+  #  elsif(index(lc($_), lc($word2)) > -1){print $_;}
+}
