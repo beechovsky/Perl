@@ -1,0 +1,18 @@
+#!/usr/bin/perl
+
+# Jeff Bucklew 
+
+# Write a program that prompts the user for the name of a file and then prints 
+# to standard output (in reversed order) the lines of the file.  Each line 
+# outputted should begin with an incremented counter 
+# (starting at 1 for the first line of output), a colon, a space, and 
+# the contents of the line from the file.
+
+print "Enter a file name: ";  #prompt user for file name 
+open(my $fh, <STDIN>) or die "can't open file";  # open the file if possible
+my @lines = <$fh>;  # FORCE LIST CONTEXT 
+my @rev_lines = reverse @lines;  # store the reversed list
+$num_lines = @lines;  # store number of elemetns for loop range
+
+# use a traditional for loop to achieve numbered lines with index variable
+for($i = 1; $i < $num_lines; $i++){ print $i, ": ", @rev_lines[$i]; }
