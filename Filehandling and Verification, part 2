@@ -1,0 +1,17 @@
+#!/usr/bin/perl -w
+
+# Jeff Bucklew 
+# CS 433 - Perry
+
+# Write a program to identify the oldest file 
+# named on the command line and report its age in days.
+
+use strict;
+use 5.010;
+
+my @files;
+foreach(@ARGV){ push(@files, $_) if(-e); }
+
+my @sorted_files = reverse sort { -M $a <=> -M $b } @files;
+
+print "The oldest file is ", $sorted_files[0], " and it is ", -M $sorted_files[0], " days old.\n";
