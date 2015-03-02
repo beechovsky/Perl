@@ -1,0 +1,28 @@
+#!/usr/bin/perl -w
+
+# Jeff Bucklew 
+
+# Write a program that reads a list of filenames from 
+# a file (each filename is listed on a line in the input file) 
+# specificed on the command line and reports for each filename 
+# whether it’s readable, writable, executable, or doesn’t exist.
+
+use strict;
+use 5.010;
+
+print "Enter the name of a file: ";
+open(my $fh_in, <>)or die "can't open file";
+
+my $file_names = <$fh_in>;
+
+foreach(split(/\s/, $file_names))
+{
+   if(-e)
+   {
+      print $_, " is readable\n" if(-r);
+      print $_, " is writable\n" if(-w);
+      print $_, " is executable\n" if(-X);
+   }
+   else { print $_, " does not exist.\n"; }
+}
+
