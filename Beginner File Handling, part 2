@@ -1,0 +1,23 @@
+#!/usr/bin/perl -w
+
+# Jeff Bucklew 
+
+# Write a program that prompts the user for the name of a file 
+# and then prints out each unique word, ignoring case, in the file in double quotes, 
+# a colon, a space, and a count of how many times the word appeared in the file.
+
+use strict;  # note '-w' in shebang, same as 'use warnings'
+use Data::Dumper;  # useful for tracing arrays
+
+print "Enter a filename: ";  #prompt
+open(my $fh, <STDIN>) or die "can't open file";  # open the file
+
+my %count;  # hash table, words and their # of appearances are key/val pairs
+
+while(my $line = <$fh>)
+{
+    chomp $line;
+    foreach(split /\W/, $line) { $count{lc($_)}++; }
+}
+
+foreach(keys %count){ print '"', $_, '"', ": ", $count{$_}, "\n"; }
