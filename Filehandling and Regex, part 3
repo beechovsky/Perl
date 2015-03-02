@@ -1,0 +1,28 @@
+#!/usr/bin/perl -w
+
+# Jeff Bucklew
+
+# Write a program that prompts the user for input 
+# (the input will be a regular expression and a text file) 
+# and matches five consecutive copies of the regular 
+# expression in the text file, printing out the line 
+# containing the match. That is, if the regular 
+# expression is fred, your program should match 
+# fredfredfredfredfred . If the regular expression is 
+# fred|barney, your pattern should match fredfredbarney 
+# fredbarney or barneyfredfredfredbarney or 
+# barneybarneybarneybarneybarney or many other variations. 
+
+use strict;
+use 5.010;
+
+print "Enter a word or expression: ";
+chomp(my $search = <>);
+
+print "Enter the name of a text file: ";
+open(my $fh_in, <>)or die "can't open file";
+
+foreach(<$fh_in>){ print $_ if(/($search){5}/); }
+
+# breakline for legibility
+print "\n";
