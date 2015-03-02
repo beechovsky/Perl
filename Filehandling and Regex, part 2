@@ -1,0 +1,34 @@
+#!/usr/bin/perl - w
+
+# Jeff Bucklew 
+
+# Write a program that prompts the user for the name of a file, 
+# a search phrase, and a replacement phrase.  The program should 
+# then make a modified copy of the text file. In the copy, every 
+# instance of the search phrase should be replaced with the 
+# replacement phrase.
+
+use strict;
+
+print "Enter a filename: ";
+open(my $fh_in, <>)or die "can't open file" ;
+
+print "Enter a word to search for in this file: ";
+chomp($search = <>);
+
+print "Enter another word to replace the search word: ";
+chomp($replace = <>);
+
+my @lines = <$fh_in>;
+
+foreach(@lines)
+{
+    $_ =~ s/\b$search\b/$replace/i;
+    print $_;
+}
+
+open(my $fh_out, '>', 'output.txt') or die "can't open file" ;
+print $fh_out @lines;
+close $fh_out;
+
+print "\nLook for 'output.txt' in this directory.\n";
