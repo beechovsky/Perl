@@ -1,0 +1,50 @@
+#!/usr/bin/perl
+#use warnings;
+#use Data::Dumper;  # makes for easy tracing of array els
+	
+sub totals
+{
+	# create a list that will hold: 
+	# @[0]: The total of a list of numbers
+	# @[1]: The total of a all the lists of numbers the subroutine has been called to evaluate when called multiple times
+	# @[2]: The numbers from the current list in reverse order 
+	
+	# the list variable
+	my @totals_list;
+	
+	# the temp sum var
+	my $sum = 0;
+	
+	# a running total of all the sums made per call to totals
+	# must be global to to maintain values across calls to this subroutine
+	# so, 'my' is left out
+	$running_total;
+	
+	# utilize default parameter list and default variable to generate a sum 
+	foreach(@_){ $sum += $_; }
+	
+	# update running total
+	$running_total += $sum;
+	
+	# reverse the current list
+	my @reversed_list = reverse(@_);
+	
+	# add scalar values to the array	
+	$totals_list[0] = $sum;
+	$totals_list[1] = $running_total;
+	
+	# add the elements of the reveresed list to the totals array
+	# NOTE: adding a list to an array slot, which is scalar, returns only the number of els in the list
+	# We'll use a splice here
+	splice @totals_list, 2, 0, @reversed_list;
+	
+	#print Dumper \@reversed_list;
+	#print Dumper \@totals_list;
+	
+	# return the list
+	return @totals_list;
+}
+
+# a couple test runs
+&totals(1, 2, 3, 4);
+&totals(2, 4, 6, 8, 10);
